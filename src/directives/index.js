@@ -5,7 +5,7 @@ export const lazyPlugin = {
     //懒加载指令
     app.directive('img-lazy', {
       mounted(el, binding) {  //el:指令绑定的元素对象（img），binding:指令对象=>binding.value:等于号 后面绑定的表达式的值=>url
-        console.log(el, binding.value)
+        // console.log(el, binding.value)
         const { stop } = useIntersectionObserver(
           el, ([{ isIntersecting }]) => { //isIntersecting判断是否进入可视区域
             // console.log(isIntersecting)

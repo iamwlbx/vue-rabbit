@@ -25,7 +25,6 @@ onMounted(() => getgoodsList())
         <ul class="goods-list">
           <li v-for="goods in item.goods" :key="goods.id">
             <GoodsItem :goods="goods">
-
             </GoodsItem>
           </li>
         </ul>
