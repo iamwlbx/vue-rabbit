@@ -1,0 +1,20 @@
+//获取轮播图数据
+import httpInstance from "@/utils/http";
+export function getBannerAPI() {
+  return httpInstance({
+    url: '/home/banner'
+  })
+}
+//规范注释
+/**
+ * @description: 获取新鲜好物
+ * @param {*}
+ * @return {*}
+ */
+
+
+export const findNewAPI = () => {
+  return httpInstance({
+    url: '/home/new'
+  })
+}
