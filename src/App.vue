@@ -7,12 +7,12 @@ import { RouterLink, RouterView } from 'vue-router'
   <!-- <el-button type="primary">Primary</el-button> -->
   <!-- <router-link to='/' />
   <router-link to='login' /> -->
-  <router-link to="/">home</router-link>
-  <router-link to="login">login</router-link>
+  <!-- <router-link to="/">home</router-link>
+  <router-link to="login">login</router-link> -->
   <RouterView />
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 header {
   line-height: 1.5;
   max-height: 100vh;
