@@ -1,5 +1,10 @@
 <script setup>
 
+//封装组件思路：拆解功能=>想实现的思路，即算法=>把该功能实现需要的技术或包导入
+
+
+
+
 import { getDetail } from '@/apis/detail'
 import { onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
@@ -47,7 +52,7 @@ onMounted(() => {
           <div class="goods-info">
             <div class="media">
               <!-- 图片预览区 -->
-              <ImgView />
+              <ImgView :imageList="goodsList.mainPictures" />
               <!-- 统计数量 -->
               <ul class="goods-sales">
                 <li>
