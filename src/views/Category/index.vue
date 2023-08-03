@@ -1,19 +1,15 @@
 <script setup>
 import GoodsItem from '../Home/components/GoodsItem.vue'
 import { useBanner } from './composables/useBanner'
-
+import { useCategory } from './composables/useCategory';
 const { bannerList } = useBanner()
-const { categoryData } = useCategory
-
-
-
-
+const { categoryData } = useCategory()
 </script>
 
 <template>
   <div class="top-category">
     <div class="container m-top-20">
-      <!-- 面包屑 -->
+      <!-- 面包屑导航 -->
       <div class="bread-container">
         <el-breadcrumb separator=">">
           <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
@@ -36,7 +32,7 @@ const { categoryData } = useCategory
         <h3>全部分类</h3>
         <ul>
           <li v-for="i in categoryData.children" :key="i.id">
-            <RouterLink to="/">
+            <RouterLink :to="`/category/sub/${i.id}`">
               <img :src="i.picture" />
               <p>{{ i.name }}</p>
             </RouterLink>
