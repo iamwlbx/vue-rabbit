@@ -6,7 +6,7 @@ import { createPinia } from 'pinia'
 
 import App from './App.vue'
 import router from './router'
-
+import { componentPlugin } from './components'
 //引入懒加载插件
 import { lazyPlugin } from './directives'
 //测试接口函数
@@ -19,6 +19,8 @@ const app = createApp(App)
 
 app.use(createPinia())
 app.use(router)
+app.use(componentPlugin)
 app.use(lazyPlugin)
+
 app.mount('#app')
 

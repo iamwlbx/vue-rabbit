@@ -1,15 +1,11 @@
 <script setup>
 
 //封装组件思路：拆解功能=>想实现的思路，即算法=>把该功能实现需要的技术或包导入
-
-
-
-
+import DetailHot from './components/DetailHot.vue'
 import { getDetail } from '@/apis/detail'
 import { onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
-import DetailHot from './components/DetailHot.vue'
-import ImgView from '@/components/ImgView/index.vue'
+
 const goodsList = ref({})
 const route = useRoute()
 const getGoods = async () => {
@@ -19,6 +15,12 @@ const getGoods = async () => {
 onMounted(() => {
   getGoods()
 })
+
+//sku规格被操作时
+const skuChange = (sku) => {
+  console.log(sku)
+
+}
 
 </script>
 
@@ -52,7 +54,7 @@ onMounted(() => {
           <div class="goods-info">
             <div class="media">
               <!-- 图片预览区 -->
-              <ImgView :imageList="goodsList.mainPictures" />
+              <XtxImgView :imageList="goodsList.mainPictures" />
               <!-- 统计数量 -->
               <ul class="goods-sales">
                 <li>
@@ -101,7 +103,7 @@ onMounted(() => {
                 </dl>
               </div>
               <!-- sku组件 -->
-
+              <XtxSku :goods="goodsList" @change="skuChange" />
               <!-- 数据组件 -->
 
               <!-- 按钮组件 -->
