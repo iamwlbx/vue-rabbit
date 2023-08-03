@@ -1,8 +1,14 @@
-//获取轮播图数据
+
 import httpInstance from "@/utils/http";
-export function getBannerAPI() {
+
+//获取轮播图数据
+export function getBannerAPI(params = {}) {
+  const { distributionSite = '1' } = params //解构赋值，默认给 1 。传值则为2，不传为默认1
   return httpInstance({
-    url: '/home/banner'
+    url: '/home/banner',
+    params: {
+      distributionSite
+    }
   })
 }
 //规范注释
