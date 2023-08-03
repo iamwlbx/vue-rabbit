@@ -8,7 +8,7 @@ const subcategoryData = ref({})
 const route = useRoute()
 const getSubcategory = async () => {
   const res = await getCategoryFilterAPI(route.params.id)
-  console.log(res)
+  // console.log(res)
   subcategoryData.value = res.result
 }
 onMounted(() => {
@@ -31,6 +31,23 @@ onMounted(() => {
   getgoodList()
 })
 
+const tabChange = () => {
+  reqData.value.page = 1
+  getgoodList()
+}
+const disabled = ref(false)
+//监听事件
+
+const load = async () => {
+  //获取下一页数据
+  reqData.value.page++  //页数+1，向服务器请求下一页数据
+  const res = await getSubCategoryAPI(reqData.value)
+  goodList.value = [...goodList.value, ...res.result.items] //新老数据进行拼接
+  if (res.result.items.length === 0) {
+    disabled.value = true
+  }
+}
+
 </script>
 
 <template>
@@ -45,12 +62,14 @@ onMounted(() => {
       </el-breadcrumb>
     </div>
     <div class="sub-container">
-      <el-tabs>
+      <el-tabs v-model="reqData.sortField" @tab-change="tabChange">
         <el-tab-pane label="最新商品" name="publishTime"></el-tab-pane>
         <el-tab-pane label="最高人气" name="orderNum"></el-tab-pane>
         <el-tab-pane label="评论最多" name="evaluateNum"></el-tab-pane>
       </el-tabs>
-      <div class="body">
+      <div class="body" v-infinite-scroll="load" :infinite-scroll-disabled="disabled">
+        <!-- v-infinite-scroll 用于判断是否已经到达底部-->
+
         <!-- 商品列表-->
         <GoodsItem v-for="item in goodList" :goods="item" :key="item.id" />
       </div>
