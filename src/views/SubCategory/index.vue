@@ -1,7 +1,8 @@
 <script setup>
-import { getCategoryFilterAPI } from '@/apis/category';
+import { getCategoryFilterAPI, getSubCategoryAPI } from '@/apis/category';
 import { onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
+import GoodsItem from '@/views/Home/components/GoodsItem.vue'
 
 const subcategoryData = ref({})
 const route = useRoute()
@@ -14,11 +15,27 @@ onMounted(() => {
   getSubcategory()
 })
 
+//获取接口列表数据
+const goodList = ref([])
+const reqData = ref({
+  categoryId: route.params.id,
+  page: 1,
+  pageSize: 20,
+  sortField: 'publishTime'
+})
+const getgoodList = async () => {
+  const res = await getSubCategoryAPI(reqData.value)
+  goodList.value = res.result.items
+}
+onMounted(() => {
+  getgoodList()
+})
+
 </script>
 
 <template>
   <div class="container ">
-    <!-- 面包屑 -->
+    <!-- 二级面包屑导航 -->
     <div class="bread-container">
       <el-breadcrumb separator=">">
         <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
@@ -35,6 +52,7 @@ onMounted(() => {
       </el-tabs>
       <div class="body">
         <!-- 商品列表-->
+        <GoodsItem v-for="item in goodList" :goods="item" :key="item.id" />
       </div>
     </div>
   </div>

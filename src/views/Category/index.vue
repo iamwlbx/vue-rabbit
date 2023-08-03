@@ -9,7 +9,7 @@ const { categoryData } = useCategory()
 <template>
   <div class="top-category">
     <div class="container m-top-20">
-      <!-- 面包屑导航 -->
+      <!-- 一级面包屑导航 -->
       <div class="bread-container">
         <el-breadcrumb separator=">">
           <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
