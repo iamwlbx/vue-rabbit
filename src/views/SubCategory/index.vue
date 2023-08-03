@@ -1,5 +1,18 @@
 <script setup>
+import { getCategoryFilterAPI } from '@/apis/category';
+import { onMounted, ref } from 'vue';
+import { useRoute } from 'vue-router';
 
+const subcategoryData = ref({})
+const route = useRoute()
+const getSubcategory = async () => {
+  const res = await getCategoryFilterAPI(route.params.id)
+  console.log(res)
+  subcategoryData.value = res.result
+}
+onMounted(() => {
+  getSubcategory()
+})
 
 </script>
 
@@ -9,9 +22,9 @@
     <div class="bread-container">
       <el-breadcrumb separator=">">
         <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-        <el-breadcrumb-item :to="{ path: '/' }">居家
+        <el-breadcrumb-item :to="{ path: `/category/${subcategoryData.parentId}` }">{{ subcategoryData.parentName }}
         </el-breadcrumb-item>
-        <el-breadcrumb-item>居家生活用品</el-breadcrumb-item>
+        <el-breadcrumb-item>{{ subcategoryData.name }}</el-breadcrumb-item>
       </el-breadcrumb>
     </div>
     <div class="sub-container">
