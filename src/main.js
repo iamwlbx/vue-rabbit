@@ -2,7 +2,9 @@
 import '@/styles/common.scss'
 
 import { createApp } from 'vue'
+//持久化store配置
 import { createPinia } from 'pinia'
+import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 
 import App from './App.vue'
 import router from './router'
@@ -17,7 +19,11 @@ import { lazyPlugin } from './directives'
 
 const app = createApp(App)
 
-app.use(createPinia())
+//注册持久化Store插件并use
+const pinia = createPinia()
+pinia.use(piniaPluginPersistedstate)
+app.use(pinia)
+
 app.use(router)
 app.use(componentPlugin)
 app.use(lazyPlugin)
