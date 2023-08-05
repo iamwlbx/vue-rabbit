@@ -51,7 +51,7 @@ const addCart = () => {
 
 <template>
   <div class="xtx-goods-page">
-    <div class="container" v-if="goodsList.details">
+    <div class="container" v-if="goodsList.details"> <!-- 当该数据存在之后，整个模板才被加载，模板中使用的该数据不会报错 -->
       <div class="bread-container">
         <el-breadcrumb separator=">">
           <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
