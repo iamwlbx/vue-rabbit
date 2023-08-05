@@ -2,6 +2,13 @@
 import { usecartStore } from '@/stores/cartStore'
 const cartStore = usecartStore()
 
+const changeCheck = (i, selected) => {
+  // console.log(i, selected)
+  cartStore.changeCheck(i.skuId, selected)
+}
+const changeAll = (selected) => {
+  cartStore.changeAll(selected)
+}
 
 
 </script>
@@ -14,7 +21,8 @@ const cartStore = usecartStore()
           <thead>
             <tr>
               <th width="120">
-                <el-checkbox />
+                <!-- 全选单选框 -->
+                <el-checkbox :model-value="cartStore.isAll" @change="changeAll" />
               </th>
               <th width="400">商品信息</th>
               <th width="220">单价</th>
@@ -27,7 +35,9 @@ const cartStore = usecartStore()
           <tbody>
             <tr v-for="i in cartStore.cartList" :key="i.id">
               <td>
-                <el-checkbox />
+                <!-- 单选框 -->
+                <!-- @change调用时有一个默认参数,完整写法为: (默认参数)=>函数名(实参) ,简写为 函数名()。 -->
+                <el-checkbox :model-value="i.selected" @change="(selected) => changeCheck(i, selected)" />
               </td>
               <td>
                 <div class="goods">
@@ -42,12 +52,16 @@ const cartStore = usecartStore()
               <td class="tc">
                 <p>&yen;{{ i.price }}</p>
               </td>
+
+              <!-- 数量 -->
               <td class="tc">
-                <el-input-number v-model="i.count" />
+                <el-input-number v-model="i.count" :min="1" :max="100" /> <!-- max等于最大库存 -->
               </td>
+              <!-- 小计 -->
               <td class="tc">
                 <p class="f16 red">&yen;{{ (i.price * i.count).toFixed(2) }}</p>
               </td>
+
               <td class="tc">
                 <p>
                   <el-popconfirm title="确认删除吗?" confirm-button-text="确认" cancel-button-text="取消" @confirm="delCart(i)">
@@ -74,8 +88,8 @@ const cartStore = usecartStore()
       <!-- 操作栏 -->
       <div class="action">
         <div class="batch">
-          共 10 件商品，已选择 2 件，商品合计：
-          <span class="red">¥ 200.00 </span>
+          共 {{ cartStore.allCount }} 件商品，已选择 {{ cartStore.selectedCount }} 件，商品合计：
+          <span class="red">¥ {{ cartStore.selectedPrice }} </span>
         </div>
         <div class="total">
           <el-button size="large" type="primary">下单结算</el-button>

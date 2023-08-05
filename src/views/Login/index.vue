@@ -1,8 +1,8 @@
 <script setup>
 import { ref } from "vue";
 import 'element-plus/theme-chalk/el-message.css'
-import { ElMessage } from "element-plus";
-import { userInfoStore } from '@/stores/user'
+import { ElMessage } from "element-plus"
+import { userInfoStore } from '@/stores/userStore'
 import { useRouter } from 'vue-router'  //区别于useRoute => 带‘r’的是方法,等于$router返回路由器实例;不带‘r’的返回当前路由地址，获取参数
 // el-form绑定表单数据对象和规则对象  >>>>>按照接口字段准备表单对象 :model=""
 // el-form-item绑定规则字段   prop=""
@@ -46,7 +46,6 @@ const doLogin = () => {
     if (valid) {
       //验证成功=>登录
       await users.getuserInfo({ account, password })
-
       ElMessage({ type: 'success', message: '登陆成功!' })
       router.replace({ path: '/' })
     }

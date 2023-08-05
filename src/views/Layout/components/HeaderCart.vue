@@ -7,7 +7,7 @@ const userCart = usecartStore()
 <template>
   <div class="cart">
     <a class="curr" href="javascript:;">
-      <i class="iconfont icon-cart"></i><em>{{ userCart.cartList.length }}</em>
+      <i class="iconfont icon-cart" @click="$router.push('/cartlist')"></i><em>{{ userCart.cartList.length }}</em>
     </a>
     <div class="layer">
       <div class="list">
@@ -28,25 +28,6 @@ const userCart = usecartStore()
           <i class="iconfont icon-close-new" @click="userCart.delCart(i.skuId)"></i>
         </div>
 
-
-        <!--
-        <div class="item" v-for="i in cartList" :key="i">
-          <RouterLink to="">
-            <img :src="i.picture" alt="" />
-            <div class="center">
-              <p class="name ellipsis-2">
-                {{ i.name }}
-              </p>
-              <p class="attr ellipsis">{{ i.attrsText }}</p>
-            </div>
-            <div class="right">
-              <p class="price">&yen;{{ i.price }}</p>
-              <p class="count">x{{ i.count }}</p>
-            </div>
-          </RouterLink>
-          <i class="iconfont icon-close-new" @click="store.delCart(i.skuId)"></i>
-        </div>
-        -->
       </div>
       <div class="foot">
         <div class="total">

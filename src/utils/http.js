@@ -1,7 +1,7 @@
 import axios from "axios";
 import 'element-plus/theme-chalk/el-message.css'
 import { ElMessage } from 'element-plus'
-import { userInfoStore } from "@/stores/user";
+import { userInfoStore } from "@/stores/userStore";
 import router from "@/router";
 const httpInstance = axios.create({
   baseURL: 'http://pcapi-xiaotuxian-front-devtest.itheima.net',

@@ -25,7 +25,7 @@ const skuChange = (sku) => {
 //商品数量count
 const count = ref(1)
 const countChange = (count) => {
-  console.log(count)
+  // console.log(count)
 }
 //判断后加入购物车
 const cartInfo = usecartStore()
@@ -41,6 +41,7 @@ const addCart = () => {
       attrsText: skuObj.specsText,
       selected: true,
     })
+    ElMessage.success('添加成功')
   } else {
     ElMessage.warning('请选择规格再加入购物车')
   }
