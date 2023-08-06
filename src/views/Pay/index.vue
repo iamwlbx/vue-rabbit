@@ -5,14 +5,19 @@ import { getOrderAPI } from '@/apis/pay';
 import { onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router'
 import { useCountDown } from '@/composables/useCountDown'
-
+import { ElMessage } from 'element-plus';
 const payInfo = ref({})
 const route = useRoute()
 const { formatTime, start } = useCountDown()
 const getPayInfo = async () => {
   const res = await getOrderAPI(route.query.id)
   payInfo.value = res.result
-  start(payInfo.value.countdown)
+  if (payInfo.value.countdown === -1) {
+    ElMessage.warning('订单已超时')
+  } else {
+    start(payInfo.value.countdown)
+  }
+
 }
 
 onMounted(() => {

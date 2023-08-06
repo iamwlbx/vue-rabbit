@@ -24,8 +24,8 @@ const exit = () => {
               </template>
             </el-popconfirm>
           </li>
-          <li><a href="javascript:;">我的订单</a></li>
-          <li><a href="javascript:;">会员中心</a></li>
+          <li><a href="javascript:;" @click="$router.replace('/member/order')">我的订单</a></li>
+          <li><a href="javascript:;" @click="$router.replace('/member')">会员中心</a></li>
         </template>
         <!-- 非登录状态 -->
         <template v-else>
